@@ -4,7 +4,7 @@
 
 # Copyright 2012  vvoody <vvoodywang@gmail.com>
 # Copyright 2016  Patrick J. Volkerding, Sebeka, MN, USA
-# Copyright 2017  MDrights <mdrights@tutanota.de>
+# Copyright 2017,2019  MDrights <mdrights@tutanota.de>
 #
 # All rights reserved.
 #
@@ -27,9 +27,9 @@
 
 PKGNAM=fcitx
 VERSION=${VERSION:-$(echo $PKGNAM-*.tar.?z* | rev | cut -f 3- -d . | cut -f 1 -d - | cut -f 2- -d _ | rev)}
-BUILD=${BUILD:-2}
-
+BUILD=${BUILD:-1_MD}
 NUMJOBS=${NUMJOBS:--j4}
+HOME=/home/user
 
 # Automatically determine the architecture we're building on:
 MARCH=$( uname -m )
@@ -110,9 +110,9 @@ cat $CWD/profile.d/fcitx.csh > $PKG/etc/profile.d/fcitx.csh
 chmod 0755 $PKG/etc/profile.d/*
 
 ## (Optional) Copy your favourite configuration to LiveSlak (user: live)
-mkdir -p $PKG/home/live/.config/fcitx/
-install -D -m 644 $CWD/dot-config-profile $PKG/home/live/.config/fcitx/profile
-install -D -m 644 $CWD/dot-config-config $PKG/home/live/.config/fcitx/config
+mkdir -p $PKG/$HOME/.config/fcitx/
+install -D -m 644 $CWD/dot-config-profile $PKG/$HOME/.config/fcitx/profile
+install -D -m 644 $CWD/dot-config-config $PKG/$HOME/.config/fcitx/config
 
 ## Copy docs/man.
 mv $PKG/usr/share/doc $PKG/usr

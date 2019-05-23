@@ -5,6 +5,8 @@ My modified SlackBuild for fcitx (IME) to be installed on LiveSlak (Slackware Li
 
 ## Changes I made
 
+- $HOME set to /home/user as default, since there are config files put in user's dir. Can be changed inside the Slackbuild.
+
 - fcitx-autostart
   - make fcitx really autostart when the DE starts (invoked by fcitx-autostart.desktop in `/etc/X11/xdg/autostart` )
 
