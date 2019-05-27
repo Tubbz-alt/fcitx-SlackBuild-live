@@ -29,7 +29,8 @@ PKGNAM=fcitx
 VERSION=${VERSION:-$(echo $PKGNAM-*.tar.?z* | rev | cut -f 3- -d . | cut -f 1 -d - | cut -f 2- -d _ | rev)}
 BUILD=${BUILD:-1_MD}
 NUMJOBS=${NUMJOBS:--j4}
-HOME=/home/user
+USER=user
+HOME=/home/$USER
 
 # Automatically determine the architecture we're building on:
 MARCH=$( uname -m )
@@ -109,10 +110,12 @@ cat $CWD/profile.d/fcitx.sh > $PKG/etc/profile.d/fcitx.sh
 cat $CWD/profile.d/fcitx.csh > $PKG/etc/profile.d/fcitx.csh
 chmod 0755 $PKG/etc/profile.d/*
 
-## (Optional) Copy your favourite configuration to LiveSlak (user: live)
+##  Copy your favourite configuration to LiveSlak 
 mkdir -p $PKG/$HOME/.config/fcitx/
+chmod -R 0755 $PKG/$HOME/.config/fcitx/
 install -D -m 644 $CWD/dot-config-profile $PKG/$HOME/.config/fcitx/profile
 install -D -m 644 $CWD/dot-config-config $PKG/$HOME/.config/fcitx/config
+chown -R ${USER}. $PKG/$HOME
 
 ## Copy docs/man.
 mv $PKG/usr/share/doc $PKG/usr
